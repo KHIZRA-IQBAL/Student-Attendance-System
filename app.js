@@ -4,6 +4,10 @@ const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const studentRoutes = require('./routes/student');
 const attendanceRoutes = require('./routes/attendance');
+const path = require('path');
+
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 dotenv.config();
 const app = express();
