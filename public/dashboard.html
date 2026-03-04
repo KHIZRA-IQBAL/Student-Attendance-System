@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Admin Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+
+    <div class="sidebar">
+        <div class="sidebar-logo">AdminPanel</div>
+        <nav>
+            <a href="#" onclick="showSection('students')" id="link-students" class="active">👥 Students</a>
+            <a href="#" onclick="showSection('attendance')" id="link-attendance">📅 Attendance</a>
+            <a href="#" class="logout-link" onclick="handleLogout()">🚪 Logout</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header id="main-header">
+            <div class="header-title">
+                <h2 id="section-title">Students Overview</h2>
+                <p id="section-desc">Manage your student records efficiently</p>
+            </div>
+            <button id="add-btn-main" class="btn-add" onclick="openModal()">+ Add New Student</button>
+        </header>
+
+        <div id="students-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <span class="stat-label">Total Students</span>
+                        <h3 id="totalCount">0</h3> 
+                    </div>
+                    <div class="stat-icon">👥</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <p class="stat-label">Present Today</p>
+                        <h3 id="presentCount">0</h3> 
+                    </div>
+                    <div class="stat-icon">✅</div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Student List</h3>
+                    <input type="text" id="searchInput" placeholder="Search by name..." onkeyup="searchTable()">
+                </div>
+                <table id="studentTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Roll No.</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentData">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="attendance-section" style="display: none;">
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>Mark Daily Attendance</h3>
+                    <input type="text" id="attendanceSearch" placeholder="Search by name..." onkeyup="searchAttendance()">
+                    <p>Date: <strong><span id="displayDate"></span></strong></p>
+                </div>
+                <table id="attendanceTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Roll No.</th>
+                            <th>Attendance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceData">
+                        </tbody>
+                </table>
+                <div style="margin-top: 20px; text-align: right;">
+                    <button class="btn-save" onclick="submitAttendance()" style="width: 200px;">Save Attendance</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Student</h3>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="editStudentId">
+
+                <div class="form-group">
+                    <label>Student Name</label>
+                    <input type="text" id="stdName" placeholder="Enter full name">
+                </div>
+                <div class="form-group">
+                    <label>Class</label>
+                    <input type="text" id="stdClass" placeholder="e.g. 10th Grade">
+                </div>
+                <div class="form-group">
+                    <label>Roll Number</label>
+                    <input type="text" id="stdRoll" placeholder="e.g. 101">
+                </div>
+                <button id="saveBtn" class="btn-save" onclick="saveStudent()">Save Student</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
